@@ -1,25 +1,26 @@
 import LoginForm from "../../Components/Layout/LoginLayout/LoginForm";
-import Footer from "../../Components/Layout/HomeLayout/Footer";
 import LoginHeader from "../../Components/Layout/LoginLayout/LoginHeader";
+import LoginFooter from "../../Components/Layout/LoginLayout/LoginFooter";
 
 export default function Login() {
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    // Changed h-screen to min-h-screen and removed overflow-hidden
+    <div className="min-h-screen flex flex-col bg-[#F8F9F5]">
       
       {/* Header */}
-      <div className="flex-shrink-0">
+      <header className="flex-shrink-0">
         <LoginHeader />
-      </div>
+      </header>
 
-      {/* Content */}
-      <div className="flex-1 flex items-center justify-center bg-[#F8F9F5] px-4">
+      {/* Content - Main area that pushes footer to bottom */}
+      <main className="flex-1 flex items-center justify-center px-4 py-12">
         <LoginForm />
-      </div>
+      </main>
 
       {/* Footer */}
-      <div className="flex-shrink-0">
-        <Footer />
-      </div>
+      <footer className="flex-shrink-0">
+        <LoginFooter />
+      </footer>
 
     </div>
   );

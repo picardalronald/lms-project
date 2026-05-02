@@ -1,38 +1,26 @@
-import { GraduationCap, ArrowRight } from 'lucide-react'; 
+import { GraduationCap } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function LoginHeader() {
   return (
-    <header className="w-full bg-white shadow-sm">
-      {/* Main Container: 
-          'max-w-7xl' pulls the items inward. 
-          'mx-auto' keeps this container centered. 
-      */}
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-100">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
         
-        {/* 1. Logo Section */}
-        <div className="flex items-center gap-3">
-          <div className="bg-[#3a947e] p-2 rounded-xl text-white">
-            <GraduationCap size={28} />
+        {/* LOGO SECTION - Exact match to Header.jsx */}
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="bg-[#3a947e] p-2 rounded-xl text-white group-hover:scale-110 transition-transform">
+            <GraduationCap size={26} />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-800 leading-tight">Verdant</h1>
-            <p className="text-xs text-slate-500 font-medium">Student Portal</p>
+            <h1 className="text-xl font-bold text-slate-800 leading-tight">
+              SILID LMS
+            </h1>
+            <p className="text-xs text-slate-500 font-medium">
+              Student Portal
+            </p>
           </div>
-        </div>
-
-        {/* 2. Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-slate-600 hover:text-[#3a947e] font-medium transition-colors">Features</a>
-          <a href="#" className="text-slate-600 hover:text-[#3a947e] font-medium transition-colors">About</a>
-          <a href="#" className="text-slate-600 hover:text-[#3a947e] font-medium transition-colors">Help</a>
-        </nav>
-
-        {/* 3. Login Button */}
-        <a href='/' className="flex items-center gap-2 bg-[#3a947e] hover:bg-[#2d7362] text-white px-6 py-2.5 rounded-xl font-semibold transition-all">
-          Preview
-          <ArrowRight size={18} />
-        </a>
-
+        </Link>
+        <div className="hidden md:block w-[100px]"></div>
       </div>
     </header>
   );

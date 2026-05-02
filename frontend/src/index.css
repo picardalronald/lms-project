@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+html {
+  /* This helps the browser know where to stop even without JS */
+  scroll-padding-top: 80px; 
+}
+
+/* Remove default scroll-behavior if Lenis is active to avoid 'jitter' */
+html.lenis {
+  scroll-behavior: auto !important;
+}
