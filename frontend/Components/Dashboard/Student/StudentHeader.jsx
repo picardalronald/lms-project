@@ -1,54 +1,117 @@
-import React from 'react';
-import { Search, Bell, LogOut } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, Search, Bell, LogOut, User, Settings, ChevronDown, X } from "lucide-react";
 
-export default function StudentHeader() {
-  const handleLogout = () => {
-    // Add your logout logic here (e.g., clearing tokens, redirecting to login)
-    console.log("User logged out");
-    window.location.href = "/login"; 
-  };
+export default function StudentHeader({ setSidebarOpen }) {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // Mobile search toggle
 
   return (
-    <header className="flex justify-between items-center py-6 px-10 bg-[#F8F9F5]">
-      {/* Search Bar */}
-      <div className="relative w-96">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-        <input 
-          type="text" 
-          placeholder="Search courses, modules, classmates..." 
-          className="w-full bg-white border border-gray-200 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-teal-600"
-        />
+    <header className="sticky top-0 z-30 bg-[#F1F5F0] px-4 md:px-10 py-4 flex items-center justify-between">
+      
+      {/* 1. Backdrop for Modal */}
+      {isProfileOpen && (
+        <div className="fixed inset-0 z-10" onClick={() => setIsProfileOpen(false)} />
+      )}
+
+      {/* LEFT: Mobile Menu & Desktop Search */}
+      <div className="flex items-center gap-4 flex-1">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden p-2 hover:bg-gray-200 rounded-lg transition-colors"
+        >
+          <Menu size={24} />
+        </button>
+
+        {/* DESKTOP SEARCH */}
+        <div className="hidden md:block w-full max-w-md relative">
+          <Search className="absolute left-3 top-2.5 text-gray-400 w-4 h-4" />
+          <input
+            className="w-full bg-white border-none shadow-sm rounded-xl py-2 pl-10 text-sm focus:ring-2 focus:ring-teal-500 outline-none transition-all"
+            placeholder="Search courses, modules, or grades..."
+          />
+        </div>
       </div>
 
-      {/* Right Side Actions */}
-      <div className="flex items-center gap-6">
+      {/* RIGHT SECTION: Icons & Profile */}
+      <div className="flex items-center gap-2 md:gap-5 relative z-20">
+        
+        {/* MOBILE SEARCH TOGGLE (Visible only on small screens) */}
+        <button 
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          className="md:hidden p-2 text-gray-600 hover:bg-white rounded-full transition-all"
+        >
+          <Search size={20} />
+        </button>
+
         {/* Notifications */}
-        <div className="relative group cursor-pointer">
-          <Bell className="w-5 h-5 text-gray-600 group-hover:text-teal-700 transition-colors" />
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-[#F8F9F5]"></span>
-        </div>
+        <button className="relative p-2 text-gray-600 hover:bg-white hover:shadow-sm rounded-full transition-all">
+          <Bell className="w-5 h-5" />
+          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-orange-500 rounded-full border-2 border-[#F1F5F0]"></span>
+        </button>
 
-        {/* Vertical Divider */}
-        <div className="h-6 w-[1px] bg-gray-200"></div>
-
-        {/* Profile & Logout Group */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-8 h-8 bg-teal-100 rounded-full border border-teal-200 overflow-hidden flex items-center justify-center text-teal-700 font-bold text-xs">
-              M
-            </div>
-            <span className="text-sm font-medium text-[#2D362F] group-hover:text-teal-700">Maya</span>
+        {/* PROFILE TRIGGER */}
+        <button 
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
+          className="flex items-center gap-2 p-1 pr-1 md:pr-3 rounded-full hover:bg-white hover:shadow-sm transition-all border border-transparent"
+        >
+          <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
+            M
           </div>
+          <ChevronDown size={14} className={`hidden md:block text-gray-500 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
+        </button>
 
-          <button 
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
-          >
-            <LogOut size={16} />
-            <span className="text-xs font-bold uppercase tracking-wider">Logout</span>
-          </button>
-        </div>
+        {/* PROFILE MODAL / DROPDOWN */}
+        {isProfileOpen && (
+          <div className="absolute right-0 top-12 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in duration-150">
+            <div className="p-5 border-b border-gray-50 bg-gray-50/50">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Student Account</p>
+              <h4 className="text-sm font-bold text-[#2D362F]">Marcus Alderson</h4>
+              <p className="text-[10px] text-gray-500 truncate">m.alderson@university.edu</p>
+            </div>
+
+            <div className="p-2">
+              <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 rounded-xl transition-colors group">
+                <User size={16} className="text-gray-400 group-hover:text-teal-600" />
+                Profile Details
+              </button>
+              <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-gray-600 hover:bg-teal-50 hover:text-teal-700 rounded-xl transition-colors group">
+                <Settings size={16} className="text-gray-400 group-hover:text-teal-600" />
+                Settings
+              </button>
+            </div>
+
+            <div className="p-2 border-t border-gray-50 bg-gray-50/30">
+              <button 
+                onClick={() => console.log("Logging out...")}
+                className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-bold text-red-500 hover:bg-red-50 rounded-xl transition-colors"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* MOBILE SEARCH OVERLAY (Slide down effect) */}
+      {isSearchOpen && (
+        <div className="absolute inset-x-0 top-0 h-16 bg-[#F1F5F0] z-40 flex items-center px-4 animate-in slide-in-from-top duration-200 md:hidden">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-2.5 text-gray-400 w-4 h-4" />
+            <input
+              autoFocus
+              className="w-full bg-white border-none shadow-md rounded-xl py-2 pl-10 pr-10 text-sm outline-none"
+              placeholder="Search..."
+            />
+            <button 
+              onClick={() => setIsSearchOpen(false)}
+              className="absolute right-3 top-2 text-gray-400"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

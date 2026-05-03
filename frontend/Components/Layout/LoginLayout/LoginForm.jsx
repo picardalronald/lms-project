@@ -5,7 +5,7 @@ export default function LoginForm() {
     <div className="w-full max-w-md ">
       
       {/* Card */}
-      <div className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-3xl shadow-lg p-8">
+      <div className="bg-[#F1F5F0] backdrop-blur-md border border-gray-200 rounded-3xl shadow-lg p-8">
         
         {/* Title */}
         <h2 className="text-2xl font-semibold text-gray-800 mb-1">
