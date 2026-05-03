@@ -1,10 +1,26 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import { Menu, Search, Bell, LogOut, User, Settings, ChevronDown, X } from "lucide-react";
 
 export default function StudentHeader({ setSidebarOpen }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Mobile search toggle
+=======
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Bell, LogOut } from 'lucide-react';
 
+export default function StudentHeader() {
+  const navigate = useNavigate();
+>>>>>>> Stashed changes
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("isLoggedIn");
+
+    navigate("/Login");
+
+  };
   return (
     <header className="sticky top-0 z-30 bg-[#F1F5F0] px-4 md:px-10 py-4 flex items-center justify-between">
       
@@ -60,6 +76,7 @@ export default function StudentHeader({ setSidebarOpen }) {
           <ChevronDown size={14} className={`hidden md:block text-gray-500 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
         </button>
 
+<<<<<<< Updated upstream
         {/* PROFILE MODAL / DROPDOWN */}
         {isProfileOpen && (
           <div className="absolute right-0 top-12 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in duration-150">
@@ -91,6 +108,17 @@ export default function StudentHeader({ setSidebarOpen }) {
             </div>
           </div>
         )}
+=======
+        {/* YOUR LOGOUT BUTTON */}
+          <button 
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-3 py-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+          >
+            <LogOut size={16} />
+            <span className="text-xs font-bold uppercase tracking-wider">Logout</span>
+          </button>
+        </div>
+>>>>>>> Stashed changes
       </div>
 
       {/* MOBILE SEARCH OVERLAY (Slide down effect) */}

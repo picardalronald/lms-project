@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -11,6 +12,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { scrollToSection } from "../Utils/ScrollToSection";
+=======
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  BookOpen, GraduationCap, ClipboardCheck, Sparkles, 
+  ShieldCheck, Clock, Users, ArrowRight 
+} from 'lucide-react';
+>>>>>>> Stashed changes
 
 export default function Body() {
   return (
@@ -98,6 +107,7 @@ export default function Body() {
       {/* 4. Bottom CTA Section */}
       <section className="px-6 py-15">
         <div className="max-w-6xl mx-auto bg-white rounded-[48px] p-16 border border-gray-100 shadow-sm flex flex-col lg:flex-row items-center gap-16">
+<<<<<<< Updated upstream
           <div className="flex-1">
             <h2 className="text-5xl font-serif font-bold text-[#2D362F] mb-6 leading-tight">
               Designed for focus, <br /> not friction.
@@ -128,6 +138,25 @@ export default function Body() {
               text="Built with students"
             />
           </div>
+=======
+            <div className="flex-1">
+                <h2 className="text-5xl font-serif font-bold text-[#2D362F] mb-6 leading-tight">
+                    Designed for focus, <br /> not friction.
+                </h2>
+                <p className="text-gray-500 text-lg mb-10 leading-relaxed font-medium">
+                    A school project portal that students actually enjoy opening — soft palette, clear hierarchy, and zero noise.
+                </p>
+                <Link to="/login" className="bg-[#3D967C] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#2D362F] transition-all">
+                    Sign in to continue &rarr;
+                </Link>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-4 w-full max-w-sm">
+                <SmallInfoCard icon={<ShieldCheck size={20}/>} text="Secure school login" />
+                <SmallInfoCard icon={<Clock size={20}/>} text="Saves you time daily" />
+                <SmallInfoCard icon={<Users size={20}/>} text="Built with students" />
+            </div>
+>>>>>>> Stashed changes
         </div>
       </section>
     </main>
